@@ -1,31 +1,22 @@
 CUPS driver for Canon CARPS printers
 ====================================
 
-This provides rastertocups filter and PPD files (specified by carps.drv file) which
+This provides rastertocarpsmf3200 filter and PPD files (specified by carps.drv file) which
 allows these printers to print from Linux and possibly any other OS where CUPS is used.
 
 carps-decode is a debug tool - it decodes CARPS data (created either by rastertocups
 filter or windows drivers), producing a PBM bitmap and debug output.
 
+carps_decode.py is tool - it decodes CARPS data
+carps_export.py - export image from CARPS data
+
 Printers known to use CARPS data format:
 
 Printer type (IEEE1284 ID)	| Status
 --------------------------------|--------------------------------------------------------
-MF5730				| works
-MF5750				| works
-MF5770				| should work
-MF5630				| works
-MF5650				| should work
-MF3110				| works
-imageCLASS D300			| works
-LASERCLASS 500			| should work
-FP-L170/MF350/L380/L398		| should work
-LC310/L390/L408S		| works
-PC-D300/FAX-L400/ICD300		| works
-L180/L380S/L398S		| works
 L120				| not supported - different data format
-MF3200 Series			| not supported - different data format, different header
-MF8100 Series			| not supported - different data format, color
+MF3200 Series			|  tested
+
 
 Compiling from source
 ---------------------

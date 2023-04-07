@@ -3,16 +3,16 @@
 Manufacturer "Canon"
 Version ""
 
-Filter application/vnd.cups-raster 100 rastertocarps
+Filter application/vnd.cups-raster 100 rastertocarpsmf3200
 
-HWMargins 14.25 14.25 14.25 14.25
+HWMargins 14.30 14.9 14.30 14.9
 
-*MediaSize Letter
+MediaSize Letter
 MediaSize Legal
 MediaSize Executive
 MediaSize A5
 MediaSize B5
-MediaSize A4
+*MediaSize A4
 MediaSize Monarch
 MediaSize Env10
 MediaSize DL
@@ -30,6 +30,7 @@ MediaType 15 "PLAIN_L/Plain Paper L"
 MediaType 30 "HEAVY/Heavy Paper"
 MediaType 35 "HEAVY_H/Heavy Paper H"
 MediaType 40 "TRANSP/Transparencies"
+MediaType 50 "ENVELOPE/Envelope_C"
 MediaType 55 "ENVELOPE/Envelope"
 
 Option "ImageRefinement/Image Refinement" Boolean AnySetup 10
@@ -37,9 +38,17 @@ Option "ImageRefinement/Image Refinement" Boolean AnySetup 10
 	*Choice "ON/On" ""
 
 Option "TonerSave/Toner Save" PickOne AnySetup 10
-	*Choice "DEFAULT/Use Printer Default" ""
-	Choice "OFF/Off" ""
+	*Choice "OFF/Off" ""
 	Choice "ON/On" ""
+
+
+{
+	Throughput 21
+	ModelName "MF3200 Series"
+	PCFileName "mf3200.ppd"
+}
+
+/* not supported:
 
 Throughput 20
 {

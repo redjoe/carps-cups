@@ -42,14 +42,15 @@ struct carps_header {
 	u8 empty[10];	/* zeros */
 } __attribute__((packed));
 
-#define MAX_BLOCK_LEN	4096
-#define MAX_DATA_LEN	(MAX_BLOCK_LEN - sizeof(struct carps_header))
+#define MAX_BLOCK_LEN	65536
+#define MAX_DATA_LEN	65517 // MAX_BLOCK_LEN - 19(sizeof(struct carps_header))
 
 #define CARPS_DATA_CONTROL	0x00
 #define CARPS_DATA_PRINT	0x02
 
 #define CARPS_BLOCK_BEGIN	0x11
 #define CARPS_BLOCK_DOC_INFO	0x12
+#define CARPS_BLOCK_DOC_INFO_MF3200 0x6b
 #define CARPS_BLOCK_END		0x13
 #define CARPS_BLOCK_BEGIN1	0x14
 #define CARPS_BLOCK_END1	0x16
@@ -62,6 +63,35 @@ struct carps_doc_info {
 	u16 type;
 	u16 unknown;
 	u8 data_len;
+} __attribute__((packed));
+
+struct carps_doc_info_mf3200 {
+	u16 type;
+	u16 unknown;
+	u16 unknown1;
+	u16 unknown2;
+	u16 unknown3;
+	u8 data_len;
+	u16 unknown4;
+	u8 data_len1;
+} __attribute__((packed));
+struct carps_doc_user_mf3200 {
+	u16 type;
+	u16 unknown;
+	u16 unknown1;
+	u8 data_len;
+} __attribute__((packed));
+struct carps_time_mf3200 {
+	u16 type;	/* 0x0009 */
+	u16 unknown; /* 0x0008 */
+	u8 year;
+	u8 year_month;
+	u8 day;
+	u8 zero;
+	u8 hour;
+	u8 min;
+	u8 sec_msec;
+	u8 msec;
 } __attribute__((packed));
 #define CARPS_DOC_INFO_TITLE	0x0004
 #define CARPS_DOC_INFO_USER	0x0006
@@ -111,7 +141,8 @@ enum carps_paper_weight {
 	WEIGHT_HEAVY	= 30,
 	WEIGHT_HEAVY_H	= 35,
 	WEIGHT_TRANSP	= 40,
-	WEIGHT_ENVELOPE	= 55,
+	// WEIGHT_ENVELOPE_C	= 50,  // for ENV_C5, ENV_COM10
+	WEIGHT_ENVELOPE	= 55,  // for ENV_DL ENV_MONAR
 };
 
 enum carps_paper_size {
